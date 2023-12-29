@@ -1,0 +1,52 @@
+version: "3.8"
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx_container
+    command: nginx -g "daemon off;"
+    links:
+      - php
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/nginx/helloworld.nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./logs/nginx:/var/log/nginx
+      - ./src/helloworld:/var/www/html/helloworld
+      - ./envFile/:/var/www/html/
+  php:
+    container_name: php
+    build: ./docker/php
+    environment:
+       MYSQL_SERVER: "mysql-container"
+       MYSQL_USER: "agreefyUser"
+       MYSQL_PASSWORD: "pass@123"
+       MYSQL_DATABASE: "agreefy_tag"
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./src/helloworld:/var/www/html/helloworld
+      - ./logs/php:/var/log/php
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./docker/mysql/initl.sql:/docker-entrypoint-initdb.d/initl.sql  
+      - ./envFile/:/var/www/html/
+    working_dir: /var/www/html/helloworld
+  mysql:
+    image: mysql:latest
+    container_name: mysql-container
+    environment:
+       MYSQL_DATABASE: "agreefy_tag"
+       MYSQL_ROOT_PASSWORD: "pass@123"
+       MYSQL_USER: "agreefyUser"
+       MYSQL_PASSWORD: "pass@123"
+    ports:
+      - "3306:3306"
+    volumes:
+      -  mysql_data:/var/lib/mysql
+      -  ./logs/mysql:/var/log/mysql
+      -  ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      -  ./docker/mysql/initl.sql:/docker-entrypoint-initdb.d/initl.sql  
+
+
+volumes:
+  mysql_data:
+    

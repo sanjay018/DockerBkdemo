@@ -1,0 +1,7 @@
+{
+    "require": {
+        "mikecao/flight": "^2.0",
+        "thingengineer/mysqli-database-class": "dev-master",
+        "vlucas/phpdotenv": "3.6.9"
+    }
+}
