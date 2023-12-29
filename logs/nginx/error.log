@@ -3833,3 +3833,10 @@
 2023/12/27 09:46:20 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
 2023/12/27 09:46:20 [notice] 1#1: start worker processes
 2023/12/27 09:46:20 [notice] 1#1: start worker process 27
+2023/12/29 08:51:27 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2023/12/29 08:51:27 [notice] 27#27: gracefully shutting down
+2023/12/29 08:51:27 [notice] 27#27: exiting
+2023/12/29 08:51:27 [notice] 27#27: exit
+2023/12/29 08:51:27 [notice] 1#1: signal 17 (SIGCHLD) received from 27
+2023/12/29 08:51:27 [notice] 1#1: worker process 27 exited with code 0
+2023/12/29 08:51:27 [notice] 1#1: exit
